@@ -59,9 +59,9 @@ selectNavColor 导航圆点被选中后的颜色
 }  
 }）  
 
-第五个参数为滚动加减按钮，默认为不开启，如不开启请不要填写此项。  
+第五个参数为翻页按钮，默认为不开启，如不开启请不要填写此项。  
 open 是否开启  
-dom 传入加减按钮dom节点，同样可以为css选择器或者dom节点  
+dom 传入翻页按钮dom节点，同样可以为css选择器或者dom节点  
 > var scroll = new FScroll({    
 		scrollY: true,  
 		scrollX: false,    //**二者不能同时存在**  
