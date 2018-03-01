@@ -53,12 +53,41 @@ FScroll.prototype._index = function(){
 	})
 	this.index.curIndex = 0;
 }
+FScroll.prototype._openNav = function() {
+	if(this.defaultOptions.nav.open == false){
+		return;
+	} else{
+		this.navEvent();
+	}
+}
+FScroll.prototype._openCountBtn = function() {
+	if(this.defaultOptions.countBtn.open == false || this.defaultOptions.scrollY){
+		return;
+	} else {
+		var that = this;
+		var childNodes = this.childNodes;
+		var childNodesLength = childNodes.length;
+		var countEls = this._dom(this.defaultOptions.countBtn.dom);
+		this.addEvent(countEls[0], 'click', function(e) {
+			e.preventDefault();
+			that.scrollRight();
+		})
+		this.addEvent(countEls[1], 'click', function(e) {
+			e.preventDefault();
+			that.scrollLeft();
+		})
+	}
+}
 FScroll.prototype.navBtnActive = function(val) {
-	var that = this;
-	this.navElsDom.forEach(function(item){
+	if(this.defaultOptions.nav.open == false){
+		return;
+	} else{
+		var that = this;
+		this.navElsDom.forEach(function(item){
 		item.style.background = that.nav.navColor;
 	})
-	this.navElsDom[val].style.background = that.nav.selectNavColor;
+		this.navElsDom[val].style.background = that.nav.selectNavColor;
+	}
 }
 FScroll.prototype.navEvent = function() {
 	var that = this;
@@ -92,31 +121,7 @@ FScroll.prototype.navEvent = function() {
 		})
 	})
 }
-FScroll.prototype._openNav = function() {
-	if(this.defaultOptions.nav.open == false){
-		return;
-	} else{
-		this.navEvent();
-	}
-}
-FScroll.prototype._openCountBtn = function() {
-	if(this.defaultOptions.countBtn.open == false || this.defaultOptions.scrollY){
-		return;
-	} else {
-		var that = this;
-		var childNodes = this.childNodes;
-		var childNodesLength = childNodes.length;
-		var countEls = this._dom(this.defaultOptions.countBtn.dom);
-		this.addEvent(countEls[0], 'click', function(e) {
-			e.preventDefault();
-			that.scrollRight();
-		})
-		this.addEvent(countEls[1], 'click', function(e) {
-			e.preventDefault();
-			that.scrollLeft();
-		})
-	}
-}
+
 FScroll.prototype.mouseWheelEvent = function () {
 	var options = this.defaultOptions;
 	//判断是否是手机	
