@@ -28,8 +28,8 @@ FScroll.prototype._init = function(options) {
 	var navEls = this.defaultOptions.nav.dom;
 	this.navElsDom = this._dom(navEls);
 	this.nav = this.defaultOptions.nav;
-	this.scrollStyle = window.getComputedStyle(this.parentNode,null);
-	
+	this.scrollStyle = window.getComputedStyle(this.elsDom[1], null);
+
 	this._index();
 	this._openNav();
 	this._openCountBtn();
@@ -137,6 +137,7 @@ FScroll.prototype.pc = function (options) {
 	var FScroll = this;
 	this.addEvent(this.parentNode, 'mousewheel', this.throttle(function (e) {
 		var e = e || window.event;
+
 		e.preventDefault();
 		var deltaY = e.deltaY ? e.deltaY : e.detail;
 		if(options.scrollY == true && options.scrollX == false) {
@@ -213,7 +214,7 @@ FScroll.prototype.scrollUp = function () {
 	this.positive(translate);
 }
 FScroll.prototype.scrollDown = function () {
-	var translate = 'translateX(0)';
+	var translate = 'translateY(0)';
 	this.negative(translate);
 }
 FScroll.prototype.scrollLeft = function () {
@@ -262,6 +263,7 @@ FScroll.prototype.addEvent = function(el, eventType, fn) {
 	if(getExploreName() == 'Firefox'){
 		//兼容Firefox
 		el.addEventListener('DOMMouseScroll', fn, false);
+		return;
 	} else if(window.addEventListener) {
 		el.addEventListener(eventType, fn, false);
 	} else if(el.attachEvent) {
