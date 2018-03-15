@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		ul{
+			position: relative;
+			width: 700px;
+			height: 700px;
+			overflow: hidden;
+			background: red;
+			border: 1px solid red;
+			list-style: none;
+		}
+		li{
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 600px;
+			height: 600px;
+			margin: 0 auto;
+			border: 1px solid white;
+		}
+		div{
+			position: absolute;
+			left: 30px;
+			top: 200px;
+			z-index: 100;
+		}
+		a{
+			display: block;
+			width: 20px;
+			height: 20px;
+			margin-bottom: 20px;
+			background: gray;
+			border-radius: 50%;
+
+		}
+
+		h2{
+			width: 40px;
+			height: 40px;
+			background: blue;
+			display: inline-block;
+			float: left;
+			z-index: 200;
+			margin-right: 20px;
+		}
+	</style>
+</head>
+<body>
+	<ul class="wrapper">
+		<li class="div1" style="background:green;z-index:50">00000</li>
+		<li class="div2" style="background:blue;z-index:40">1111111</li>
+		<li class="div3" style="background:gray;z-index:30">2222222</li>
+		<li class="div4" style="background:black;z-index:20">33333333</li>
+		<li class="div5" style="background:yellow;z-index:10">44444444</li>
+	</ul>
+	<div>
+		<a class="li1"></a>
+		<a class="li2"></a>
+		<a class="li3"></a>
+		<a class="li4"></a>
+		<a class="li5"></a>
+		<h2 class="less"></h2>
+	<h2 class="add"></h2>
+	</div>
+<script src='foldScroll.js'></script>
+<script>
+		var scroll = new FScroll(
+		{
+			scrollY: true,
+			// scrollX: true,
+			els: {
+				dom: [
+				".wrapper",
+				".div1",
+				".div2",
+				".div3",
+				".div4",
+				".div5"
+				]
+			},
+			nav: {
+				open: true,
+				dom: [
+				".li1",
+				".li2",
+				".li3",
+				".li4",
+				".li5"
+				],
+				navColor: '#fff',
+				selectNavColor: '#000'
+			},
+			countBtn: {
+				open: true,
+				dom: ['.less', '.add']
+			}
+		}
+		)
+
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
