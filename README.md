@@ -1,5 +1,25 @@
 # foldScroll  
-foldScroll 是一款折叠滚动插件，可以用于Y轴和X轴的折叠滚屏，同时兼容手机和pc端，另外支持圆点导航和X轴滚屏模式下的左右翻屏按钮。  
+foldScroll 是一款折叠滚动插件，可以用于Y轴和X轴的折叠滚屏，同时兼容手机和pc端，另外支持圆点导航和X轴滚屏模式下的左右翻屏按钮。 
+
+# html 结构
+```js
+<ul class="wrapper">
+   <li class="div1" style="background:#FF8C00;z-index:50"></li>
+   <li class="div2" style="background:#FF6347;z-index:40"></li>
+   <li class="div3" style="background:#FFA07A;z-index:30"></li>
+   <li class="div4" style="background:#F08080;z-index:20"></li>
+   <li class="div5" style="background:#CD5C5C;z-index:10"></li>
+</ul>
+<ul class="nav">
+   <li class="li1"></li>
+   <li class="li2"></li>
+   <li class="li3"></li>
+   <li class="li4"></li>
+   <li class="li5"></li>
+</ul>
+<p class="less-btn"></p>
+<p class="add-btn"></p>
+```
 ## 用法  
 只需要new一个FScroll()对象
 > new FScroll({}) 
@@ -15,21 +35,27 @@ foldScroll 是一款折叠滚动插件，可以用于Y轴和X轴的折叠滚屏�
   )  
 
 第二个参数 transition, 滚屏过渡动画，第一个为过渡时间， 第二个为过度曲线， 不传入则默认为 '.7s ease' 。
-> var scroll = new FScroll(  
-	 {  
+> var scroll = new FScroll(  
+	 {  
 		scrollY: true,  
-		scrollX: false    //**二者不能同时存在**  
+		scrollX: false,    //**二者不能同时存在**  
     transition: '.7s ease'  
    }  
   )  
 
 第三个参数, 在els对象中传入一个dom数组对象，其中第一个参数表示滚动的父容器，后边依次传入子元素，可以为CSS选择器(字符串)或者dom节点。
-> var scroll = new FScroll({    
+> > var scroll = new FScroll(  
+	 {  
 		scrollY: true,  
 		scrollX: false,    //**二者不能同时存在**  
     transition: '.7s ease',  
     els: {  
-        dom: [ul, li, li, li, ....]  
+        dom: [".wrapper",
+		".div1",
+		".div2",
+		".div3",
+		".div4",
+		".div5"....]   
 			  }  
 })  
 
@@ -43,7 +69,12 @@ selectNavColor 导航圆点被选中后的颜色
 		scrollX: false,    //**二者不能同时存在**  
     transition: '.7s ease',  
     els: {  
-        dom: [ul, li, li, li, ....]  
+        dom: [".wrapper",
+		".div1",
+		".div2",
+		".div3",
+		".div4",
+		".div5"....]  
 			  },  
     nav: {  
 	    open: false,  
@@ -67,7 +98,12 @@ dom 传入翻页按钮dom节点，同样可以为css选择器或者dom节点
     scrollX: false,    //**二者不能同时存在**  
     transition: '.7s ease',  
     els: {  
-        dom: [ul, li, li, li, ....]  
+        dom: [".wrapper",
+		".div1",
+		".div2",
+		".div3",
+		".div4",
+		".div5"....]   
 			  },  
     nav: {  
 	    open: false,  
