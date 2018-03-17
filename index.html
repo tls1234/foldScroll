@@ -2,80 +2,90 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>fold-scroll</title>
 	<style>
 		*{
 			margin: 0;
 			padding: 0;
 		}
-		ul{
+		html,body{
+			width: 100%;
+			height: 100%;
+		}
+		.wrapper{
 			position: relative;
-			width: 700px;
-			height: 700px;
+			width: 100%;
+			height: 100%;
 			overflow: hidden;
-			background: red;
-			border: 1px solid red;
+			background: #A0522D;
 			list-style: none;
 		}
-		li{
+		.wrapper li{
 			position: absolute;
 			top: 0;
 			left: 0;
-			width: 600px;
-			height: 600px;
+			width: 100%;
+			height: 100%;
 			margin: 0 auto;
 			border: 1px solid white;
 		}
-		div{
+		.nav{
 			position: absolute;
 			left: 30px;
-			top: 200px;
+			top: 50%;
+			transform: translateY(-100px);
 			z-index: 100;
 		}
-		a{
+		.nav li{
 			display: block;
-			width: 20px;
-			height: 20px;
+			width: 13px;
+			height: 13px;
 			margin-bottom: 20px;
-			background: gray;
 			border-radius: 50%;
-
+			border: 3px solid #e6e6e6;
+			opacity: 0.9;
 		}
-
-		h2{
+		p{
 			width: 40px;
 			height: 40px;
-			background: blue;
+			background: #DBDBDB;
 			display: inline-block;
-			float: left;
 			z-index: 200;
-			margin-right: 20px;
+		}
+		.less-btn{
+			position: absolute;
+			left: 30px;
+			top: 50%;
+		}
+		.add-btn{
+			position: absolute;
+			right: 30px;
+			top: 50%;
 		}
 	</style>
 </head>
 <body>
 	<ul class="wrapper">
-		<li class="div1" style="background:green;z-index:50">00000</li>
-		<li class="div2" style="background:blue;z-index:40">1111111</li>
-		<li class="div3" style="background:gray;z-index:30">2222222</li>
-		<li class="div4" style="background:black;z-index:20">33333333</li>
-		<li class="div5" style="background:yellow;z-index:10">44444444</li>
+		<li class="div1" style="background:#FF8C00;z-index:50"></li>
+		<li class="div2" style="background:#FF6347;z-index:40"></li>
+		<li class="div3" style="background:#FFA07A;z-index:30"></li>
+		<li class="div4" style="background:#F08080;z-index:20"></li>
+		<li class="div5" style="background:#CD5C5C;z-index:10"></li>
 	</ul>
-	<div>
-		<a class="li1"></a>
-		<a class="li2"></a>
-		<a class="li3"></a>
-		<a class="li4"></a>
-		<a class="li5"></a>
-		<h2 class="less"></h2>
-	<h2 class="add"></h2>
-	</div>
-<script src='foldScroll.js'></script>
-<script>
+	<ul class="nav">
+		<li class="li1"></li>
+		<li class="li2"></li>
+		<li class="li3"></li>
+		<li class="li4"></li>
+		<li class="li5"></li>
+	</ul>
+	<p class="less-btn"></p>
+	<p class="add-btn"></p>
+	<script src='foldScroll.js'></script>
+	<script>
 		var scroll = new FScroll(
 		{
-			scrollY: true,
-			// scrollX: true,
+			scrollX: true,
 			els: {
 				dom: [
 				".wrapper",
@@ -95,23 +105,15 @@
 				".li4",
 				".li5"
 				],
-				navColor: '#fff',
-				selectNavColor: '#000'
+				navColor: '',
+				selectNavColor: '#e6e6e6'
 			},
 			countBtn: {
 				open: true,
-				dom: ['.less', '.add']
+				dom: ['.less-btn', '.add-btn']
 			}
 		}
 		)
-
 	</script>
 </body>
 </html>
-
-
-
-
-
-
-
