@@ -1,6 +1,7 @@
 # foldScroll  
-foldScroll 是一款折叠滚动插件，可以用于Y轴和X轴的折叠滚屏，同时兼容手机和pc端，另外支持圆点导航和X轴滚屏模式下的左右翻屏按钮。 
-
+foldScroll 是一款折叠滚动插件，可以用于Y轴和X轴的折叠滚屏，同时兼容手机和pc端，另外支持圆点导航和X轴滚屏模式下的左右翻屏按钮。  
+X轴滚动简易demo地址--http://htmlpreview.github.io/?https://github.com/tls1234/foldScroll/blob/master/scrollX/index.html  
+Y轴滚动简易demo地址--http://htmlpreview.github.io/?https://github.com/tls1234/foldScroll/blob/master/scrollY/index.html  
 # html 结构
 ```js
 <ul class="wrapper">
