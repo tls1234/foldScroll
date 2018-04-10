@@ -70,19 +70,21 @@
 		<li class="div5" style="background:#CD5C5C;z-index:10"></li>
 	</ul>
 	<ul class="nav">
-			<li class="li1"></li>
-			<li class="li2"></li>
-			<li class="li3"></li>
-			<li class="li4"></li>
-			<li class="li5"></li>
+		<li class="li1"></li>
+		<li class="li2"></li>
+		<li class="li3"></li>
+		<li class="li4"></li>
+		<li class="li5"></li>
 	</ul>
 	<p class="less-btn"></p>
 	<p class="add-btn"></p>
-	<script src='../foldScroll.js'></script>
+	<script src='foldScroll.js'></script>
 	<script>
 		var scroll = new FScroll(
 		{
+			scrollY: false,
 			scrollX: true,
+			transition: '.7s ease',
 			els: {
 				dom: [
 				".wrapper",
@@ -94,7 +96,6 @@
 				]
 			},
 			nav: {
-				open: true,
 				dom: [
 				".li1",
 				".li2",
@@ -106,7 +107,6 @@
 				selectNavColor: '#e6e6e6'
 			},
 			countBtn: {
-				open: true,
 				dom: ['.less-btn', '.add-btn']
 			}
 		}
