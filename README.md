@@ -34,20 +34,18 @@ Y轴滚动demo地址--http://htmlpreview.github.io/?https://github.com/tls1234/f
 
 第三个参数, 在els对象中传入一个dom数组对象，其中第一个参数表示滚动的父容器，后边依次传入子元素，可以为CSS选择器(字符串)或者dom节点。  
 
-第四个参数，nav对象，是否开启导航圆点，如果不开启请不要填写nav对象。   
-　　　　open 开启导航圆点    
+第四个参数，nav对象，是否开启导航圆点，如果不开启则省略此参数      
 　　　　dom 导航圆点dom节点 ，可以为css选择器(字符串)或者dom节点    
 　　　　navColor 导航圆点颜色    
 　　　　selectNavColor 导航圆点被选中后的颜色    
       
-第五个参数为翻页按钮，默认为不开启，如不开启请不要填写此项   
-　　　　open 是否开启  
+第五个参数为翻页按钮，，如不开启则省略此参数    
 　　　　dom 传入翻页按钮dom节点，同样可以为css选择器或者dom节点  
 ```js
 var scroll = new FScroll(
 		{
-			scrollY: true,　　　　　　　／／竖屏滚动
-			scrollX: false,　　　　　　／／横屏滚动
+			scrollY: true,　　　　　　　／／竖屏滚动，为false则可以省略此参数
+			scrollX: false,　　　　　　／／横屏滚动，为false则可以省略此参数
 			transition: '.7s ease',　／／滚屏过渡效果　（可以省略，默认启用内置过度效果）
 			els: {　　　　　　　　　　　／／滚动相关元素节点
 				dom: [
@@ -59,8 +57,7 @@ var scroll = new FScroll(
 				".div5"
 				]
 			},
-			nav: {　　　　　　　　　　　／／导航圆点
-				open: true,　　　／／是否开启导航圆点
+			nav: {　　　　　　　　　　　／／导航圆点 ，如果不需要导航则省略此参数
 				dom: [　　　　　　／／导航圆点元素
 				".li1",　　　
 				".li2",
@@ -71,8 +68,7 @@ var scroll = new FScroll(
 				navColor: '',　　／／导航圆点颜色 
 				selectNavColor: '#e6e6e6'　　／／导航圆点被选中后的颜色 
 			},
-			countBtn: {　　　　　　　　／／翻页按钮
-				open: true,　　　／／是否开启  
+			countBtn: {　　　　　　　　／／翻页按钮 ，如果不需要翻页按钮则省略此参数
 				dom: ['.less-btn', '.add-btn']　　／／翻页按钮dom节点
 			}
 		})
