@@ -54,14 +54,14 @@ FScroll.prototype._index = function(){
 	this.index.curIndex = 0;
 }
 FScroll.prototype._openNav = function() {
-	if(this.defaultOptions.nav.open == false){
+	if(!this.defaultOptions.nav){
 		return;
 	} else{
 		this.navEvent();
 	}
 }
 FScroll.prototype._openCountBtn = function() {
-	if(this.defaultOptions.countBtn.open == false || this.defaultOptions.scrollY){
+	if(!this.defaultOptions.countBtn || this.defaultOptions.scrollY){
 		return;
 	} else {
 		var that = this;
@@ -79,7 +79,7 @@ FScroll.prototype._openCountBtn = function() {
 	}
 }
 FScroll.prototype.navBtnActive = function(val) {
-	if(this.defaultOptions.nav.open == false){
+	if(!this.defaultOptions.nav){
 		return;
 	} else{
 		var that = this;
@@ -97,7 +97,7 @@ FScroll.prototype.navEvent = function() {
 			var preIndex = that.index.curIndex;
 			var curIndex = that.navElsDom.indexOf(e.target);
 			e.target.style.background = that.nav.selectNavColor;
-			if(that.defaultOptions.scrollX == true) {
+			if(that.defaultOptions.scrollX) {
 				if(preIndex < curIndex){
 					for(var i = preIndex; i < curIndex; i++) {
 						that.scrollLeft();
@@ -107,7 +107,7 @@ FScroll.prototype.navEvent = function() {
 						that.scrollRight();
 					}
 				}
-			} else if(that.defaultOptions.scrollY == true){
+			} else if(that.defaultOptions.scrollY){
 				if(preIndex < curIndex){
 					for(var i = preIndex; i < curIndex; i++) {
 						that.scrollUp();
@@ -137,10 +137,9 @@ FScroll.prototype.pc = function (options) {
 	var FScroll = this;
 	this.addEvent(this.parentNode, 'mousewheel', this.throttle(function (e) {
 		var e = e || window.event;
-
 		e.preventDefault();
 		var deltaY = e.deltaY ? e.deltaY : e.detail;
-		if(options.scrollY == true && options.scrollX == false) {
+		if(options.scrollY && !options.scrollX) {
 			if(deltaY > 0) {
 				FScroll.scrollUp();
 			} 
@@ -193,13 +192,13 @@ FScroll.prototype.mobile = function (options) {
    		X = moveEndX - startX;
    		Y = moveEndY - startY;
 		// //判断touch方向
-		if(options.scrollY == true && options.scrollX == false) {
+		if(options.scrollY && !options.scrollX) {
 			if(Y < 0 && Math.abs(Y) > Math.abs(X)){
 				FScroll.scrollUp();
 			} else if(Y > 0 && Math.abs(Y) > Math.abs(X)){
 				FScroll.scrollDown();
 			}
-		} else if (options.scrollX == true && options.scrollY == false) {
+		} else if (options.scrollX && !options.scrollY) {
 			if(X < 0 && Math.abs(X) > Math.abs(Y)){
 				FScroll.scrollLeft();
 			} else if(X > 0 && Math.abs(X) > Math.abs(Y)){
