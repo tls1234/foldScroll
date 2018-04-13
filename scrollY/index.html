@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 	<title>fold-scroll</title>
 	<style>
 		*{
@@ -27,17 +28,15 @@
 		}
 		.nav{
 			position: absolute;
-			left: 50%;
-			top: 670px;
-			transform: translateX(-100px);
+			left: 30px;
+			top: 200px;
 			z-index: 100;
 		}
 		.nav li{
-			float: left;
 			display: block;
 			width: 13px;
 			height: 13px;
-			margin-right: 10px;
+			margin-bottom: 10px;
 			border-radius: 50%;
 			border: 3px solid #e6e6e6;
 			opacity: 0.9;
@@ -48,16 +47,6 @@
 			background: #DBDBDB;
 			display: inline-block;
 			z-index: 200;
-		}
-		.less-btn{
-			position: absolute;
-			left: 30px;
-			top: 330px;
-		}
-		.add-btn{
-			position: absolute;
-			right: 30px;
-			top: 330px;
 		}
 	</style>
 </head>
@@ -76,8 +65,6 @@
 		<li class="li4"></li>
 		<li class="li5"></li>
 	</ul>
-	<p class="less-btn"></p>
-	<p class="add-btn"></p>
 	<script src='../foldScroll.js'></script>
 	<script>
 		var scroll = new FScroll(
