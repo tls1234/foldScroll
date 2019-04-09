@@ -3,7 +3,8 @@ foldScroll 是一款折叠滚动插件，可以用于Y轴和X轴的折叠滚屏�
 X轴滚动demo地址--http://htmlpreview.github.io/?https://github.com/tls1234/foldScroll/blob/master/scrollX/index.html  
 
 Y轴滚动demo地址--http://htmlpreview.github.io/?https://github.com/tls1234/foldScroll/blob/master/scrollY/index.html  
-# html 结构
+# html 结构  
+！！ 必须设定每项 z-index的值  
 ```js
 <ul class="wrapper">
    <li class="div1" style="background:#FF8C00;z-index:50"></li>
