@@ -76,4 +76,4 @@ var scroll = new FScroll(
 
 # Future  
 1. 支持横屏轮播  
-2. 优化传入的参数  
+2. 优化传入参数  
