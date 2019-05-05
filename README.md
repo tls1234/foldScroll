@@ -47,8 +47,8 @@ X轴滚动demo地址--https://tls1234.github.io/foldScroll/scrollX
 ```js
 var scroll = new FScroll(
 		{
-			mode: 'scrollY',			//开启竖屏滚动模式  横屏滚动则 mode: 'scrollX'
-			transition: '.7s ease',　／／滚屏过渡效果　（可以省略，默认启用内置过度效果）
+			mode: 'scrollY',	//开启竖屏滚动模式  横屏滚动则 mode: 'scrollX'
+			transition: '.7s ease',　／／滚屏过渡效果　（可以省略，默认启用内置过渡效果）
 			els: {　　　　　　　　　　　／／滚动相关元素节点
 				dom: [
 				".wrapper",　　　／／滚动的父容器
