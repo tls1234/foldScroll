@@ -77,8 +77,8 @@ FScroll.prototype.navBtnActive = function(val) {
 	} else{
 		var that = this;
 		this.navElsDom.forEach(function(item){
-		item.style.background = that.nav.navColor;
-	})
+			item.style.background = that.nav.navColor;
+		})
 		this.navElsDom[val].style.background = that.nav.selectNavColor;
 	}
 }
@@ -128,7 +128,7 @@ FScroll.prototype.pc = function (options) {
 	//mouseWheel事件
 	//DOMMouseScroll为了兼容firefox的mousewheel事件
 	var FScroll = this;
-	this.addEvent(this.parentNode, 'mousewheel', this.throttle(function (e) {
+	this.addEvent(this.parentNode, 'mousewheel', this.debounce(function (e) {
 		var e = e || window.event;
 		e.preventDefault();
 		var deltaY = e.deltaY ? e.deltaY : e.detail;
@@ -140,50 +140,53 @@ FScroll.prototype.pc = function (options) {
 				FScroll.scrollDown();
 			}	
 		}
-	}, 1500))
+	}, 100,1000))
 }
-FScroll.prototype.throttle = function (scroll, time) {
-	var timeout, startTime = Date.now();
-	return function() {
-		var context = this;
-		var args = arguments[0];
-		var curTime = Date.now();
-		clearTimeout(timeout);
-		    // 如果达到了规定的触发时间间隔，触发 handler
-		    if(curTime - startTime >= time){
-		    	scroll.call(context, args);
-		    	// 没达到触发间隔，重新设定定时器
-		    	startTime = curTime;
-		    }
-		}
-}
+FScroll.prototype.debounce = function (func, wait, immediate) {
+	var timeout, result;
+	return function () { 
+		var context = this; 
+		var args = arguments; 
+		if (timeout) clearTimeout(timeout); 
+	 if (immediate) { // 如果已经执行过，不再执行
+	 	var callNow = !timeout; 
+	 	timeout = setTimeout(function(){ 
+	 		timeout = null; 
+	 	}, wait) 
+	 	if (callNow) func.apply(context, args) } 
+	 		else { timeout = setTimeout(function(){ 
+	 			func.apply(context, args) 
+	 		}, wait); 
+	 	} 
+	 }
+	}
 
-FScroll.prototype.mobile = function (options) {
-	var startX,startY,moveEndX,moveEndY,X,Y;
-	var FScroll = this;
-	this.addEvent(this.parentNode, 'touchstart', this.throttle(function(e) {
-		var e = e || window.event;
-		if (e.cancelable) {
+	FScroll.prototype.mobile = function (options) {
+		var startX,startY,moveEndX,moveEndY,X,Y;
+		var FScroll = this;
+		this.addEvent(this.parentNode, 'touchstart', function(e) {
+			var e = e || window.event;
+			if (e.cancelable) {
         	// 判断默认行为是否已经被禁用
         	if (!e.defaultPrevented) {
         		e.preventDefault();
         	}
-    	}
-    	startX = e.touches[0].clientX;
-    	startY = e.touches[0].clientY;
-	}, 700))
-	this.addEvent(this.parentNode, 'touchend', this.throttle(function(e) {
-		var e = e || window.event;
-		if (e.cancelable) {
+        }
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    })
+		this.addEvent(this.parentNode, 'touchend', function(e) {
+			var e = e || window.event;
+			if (e.cancelable) {
         // 判断默认行为是否已经被禁用
-        	if (!e.defaultPrevented) {
-        		e.preventDefault();
-        	}
-    	}
-   		moveEndX = e.changedTouches[0].clientX;
-   		moveEndY = e.changedTouches[0].clientY;
-   		X = moveEndX - startX;
-   		Y = moveEndY - startY;
+        if (!e.defaultPrevented) {
+        	e.preventDefault();
+        }
+    }
+    moveEndX = e.changedTouches[0].clientX;
+    moveEndY = e.changedTouches[0].clientY;
+    X = moveEndX - startX;
+    Y = moveEndY - startY;
 		// //判断touch方向
 		if(options.mode == 'scrollY') {
 			if(Y < 0 && Math.abs(Y) > Math.abs(X)){
@@ -198,61 +201,61 @@ FScroll.prototype.mobile = function (options) {
 				FScroll.scrollRight();
 			}
 		}
-	}, 700))
-}
-FScroll.prototype.scrollUp = function () {
-	var rectHeight = '-' + this.scrollStyle.getPropertyValue('height');
-	var translate = 'translateY('+ rectHeight +')';
-	this.positive(translate);
-}
-FScroll.prototype.scrollDown = function () {
-	var translate = 'translateY(0)';
-	this.negative(translate);
-}
-FScroll.prototype.scrollLeft = function () {
-	var rectWidth = '-' + this.scrollStyle.getPropertyValue('width');
-	var translate = 'translateX('+ rectWidth +')';
-	this.positive(translate);
-}
-FScroll.prototype.scrollRight = function () {
-	var translate = 'translateX(0)';
-	this.negative(translate);
+	})
 	}
-FScroll.prototype.positive = function(translate) {
-	var childNodes = this.childNodes;
-	var childNodesLength = childNodes.length;
-	var curIndex = this.index.curIndex;
-	var transition = 'all' + this.defaultOptions.transition;
-	if(curIndex === childNodesLength - 1){
-		return;
-	} else {
-		childNodes[curIndex].style.webkitTransform = translate;
-		childNodes[curIndex].style.MozTransform = translate;
-		childNodes[curIndex].style.msTransform = translate;
-		childNodes[curIndex].style.OTransform = translate;
-		childNodes[curIndex].style.transform = translate;
-		childNodes[curIndex].style.transition = transition;
-		this.index.curIndex ++;
-	}	
-}
-FScroll.prototype.negative = function(translate) {
-	var childNodes = this.childNodes;
-	var curIndex = this.index.curIndex;
-	var transition = 'all' + this.defaultOptions.transition;
-	if(curIndex === 0){
-		return;
-	} else{
-		childNodes[curIndex - 1].style.webkitTransform = translate;
-		childNodes[curIndex - 1].style.MozTransform = translate;
-		childNodes[curIndex - 1].style.msTransform = translate;
-		childNodes[curIndex - 1].style.OTransform = translate;
-		childNodes[curIndex - 1].style.transform = translate;
-		childNodes[curIndex - 1].style.transition = transition;
-		this.index.curIndex --;
+	FScroll.prototype.scrollUp = function () {
+		var rectHeight = '-' + this.scrollStyle.getPropertyValue('height');
+		var translate = 'translateY('+ rectHeight +')';
+		this.positive(translate);
 	}
-}
-FScroll.prototype.addEvent = function(el, eventType, fn) {
-	if(getExploreName() == 'Firefox'){
+	FScroll.prototype.scrollDown = function () {
+		var translate = 'translateY(0)';
+		this.negative(translate);
+	}
+	FScroll.prototype.scrollLeft = function () {
+		var rectWidth = '-' + this.scrollStyle.getPropertyValue('width');
+		var translate = 'translateX('+ rectWidth +')';
+		this.positive(translate);
+	}
+	FScroll.prototype.scrollRight = function () {
+		var translate = 'translateX(0)';
+		this.negative(translate);
+	}
+	FScroll.prototype.positive = function(translate) {
+		var childNodes = this.childNodes;
+		var childNodesLength = childNodes.length;
+		var curIndex = this.index.curIndex;
+		var transition = 'all' + this.defaultOptions.transition;
+		if(curIndex === childNodesLength - 1){
+			return;
+		} else {
+			childNodes[curIndex].style.webkitTransform = translate;
+			childNodes[curIndex].style.MozTransform = translate;
+			childNodes[curIndex].style.msTransform = translate;
+			childNodes[curIndex].style.OTransform = translate;
+			childNodes[curIndex].style.transform = translate;
+			childNodes[curIndex].style.transition = transition;
+			this.index.curIndex ++;
+		}	
+	}
+	FScroll.prototype.negative = function(translate) {
+		var childNodes = this.childNodes;
+		var curIndex = this.index.curIndex;
+		var transition = 'all' + this.defaultOptions.transition;
+		if(curIndex === 0){
+			return;
+		} else{
+			childNodes[curIndex - 1].style.webkitTransform = translate;
+			childNodes[curIndex - 1].style.MozTransform = translate;
+			childNodes[curIndex - 1].style.msTransform = translate;
+			childNodes[curIndex - 1].style.OTransform = translate;
+			childNodes[curIndex - 1].style.transform = translate;
+			childNodes[curIndex - 1].style.transition = transition;
+			this.index.curIndex --;
+		}
+	}
+	FScroll.prototype.addEvent = function(el, eventType, fn) {
+		if(getExploreName() == 'Firefox'){
 		//兼容Firefox
 		el.addEventListener('DOMMouseScroll', fn, false);
 		return;
