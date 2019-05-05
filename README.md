@@ -1,7 +1,10 @@
 # foldScroll  
-foldScroll 是一款Y轴折叠滚屏插件，后扩展为同时支持Y轴和X轴的滚屏插件，同时兼容手机和pc端，另外支持圆点导航和X轴滚屏模式下的左右翻屏按钮。  
-X轴滚动demo地址--https://tls1234.github.io/foldScroll/scrollX  (支持手机端滑动和Pc端点击翻页及导航按钮)  
-Y轴滚动demo地址--https://tls1234.github.io/foldScroll/scrollY  (支持手机端滑动和Pc端鼠标滚轮及导航按钮)  
+foldScroll 是一款折叠滚动插件，可以用于Y轴和X轴的折叠滚屏，同时兼容手机和pc端，另外支持圆点导航和X轴滚屏模式下的左右翻屏按钮。  
+Y轴滚动demo地址--https://tls1234.github.io/foldScroll/scrollY 
+
+X轴滚动demo地址--https://tls1234.github.io/foldScroll/scrollX  
+
+ 
 # html 结构  
 ！！ 必须设定每项 z-index的值  
 ```js
@@ -28,7 +31,7 @@ Y轴滚动demo地址--https://tls1234.github.io/foldScroll/scrollY  (支持手�
 
 然后传入一个Object对象，里边包含一些配置参数
 ## 参数 
-第一个参数 scrollY 和 scrollX ,二者只能一个为true, scrollY 表示竖屏滚动，scrollX 表示横屏滚动。   
+第一个参数 mode ,scrollY 表示竖屏滚动，scrollX 表示横屏滚动。   
 
 第二个参数 transition, 滚屏过渡动画，第一个为过渡时间， 第二个为过度曲线， 不传入则默认为 '.7s ease' 。   
 
@@ -44,8 +47,7 @@ Y轴滚动demo地址--https://tls1234.github.io/foldScroll/scrollY  (支持手�
 ```js
 var scroll = new FScroll(
 		{
-			scrollY: true,　　　　　　　／／竖屏滚动，为false则可以省略此参数
-			scrollX: false,　　　　　　／／横屏滚动，为false则可以省略此参数
+			mode: 'scrollY',			//开启竖屏滚动模式  横屏滚动则 mode: 'scrollX'
 			transition: '.7s ease',　／／滚屏过渡效果　（可以省略，默认启用内置过度效果）
 			els: {　　　　　　　　　　　／／滚动相关元素节点
 				dom: [
@@ -73,7 +75,3 @@ var scroll = new FScroll(
 			}
 		})
 ```
-
-# Future  
-1. 支持横屏轮播  
-2. 优化传入参数  

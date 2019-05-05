@@ -1,16 +1,13 @@
 function FScroll(options) {
 	this.defaultOptions = {
-		scrollX: false,
-		scrollY: false,
+		mode: '',
 		transition: '.7s ease',
 		nav: {
-			open: false,
 			dom: [],
 			navColor: '#fff',
 			selectNavColor: '#000'
 		},
 		countBtn: {
-			open: false,
 			dom: []
 		}
 	}
@@ -30,7 +27,7 @@ FScroll.prototype._init = function(options) {
 	this.nav = this.defaultOptions.nav;
 	this.scrollStyle = window.getComputedStyle(this.elsDom[1], null);
 
-	this._index();
+	this._index();//数据变动自动刷新视图
 	this._openNav();
 	this._openCountBtn();
 	//设置鼠标滚轮事件
@@ -54,16 +51,12 @@ FScroll.prototype._index = function(){
 	this.index.curIndex = 0;
 }
 FScroll.prototype._openNav = function() {
-	if(!this.defaultOptions.nav){
-		return;
-	} else{
+	if(this.defaultOptions.nav){
 		this.navEvent();
-	}
+	} 
 }
 FScroll.prototype._openCountBtn = function() {
-	if(!this.defaultOptions.countBtn || this.defaultOptions.scrollY){
-		return;
-	} else {
+	if(this.defaultOptions.countBtn && this.defaultOptions.mode == 'scrollX'){
 		var that = this;
 		var childNodes = this.childNodes;
 		var childNodesLength = childNodes.length;
@@ -97,7 +90,7 @@ FScroll.prototype.navEvent = function() {
 			var preIndex = that.index.curIndex;
 			var curIndex = that.navElsDom.indexOf(e.target);
 			e.target.style.background = that.nav.selectNavColor;
-			if(that.defaultOptions.scrollX) {
+			if(that.defaultOptions.mode == 'scrollX') {
 				if(preIndex < curIndex){
 					for(var i = preIndex; i < curIndex; i++) {
 						that.scrollLeft();
@@ -107,7 +100,7 @@ FScroll.prototype.navEvent = function() {
 						that.scrollRight();
 					}
 				}
-			} else if(that.defaultOptions.scrollY){
+			} else if(that.defaultOptions.mode == 'scrollY'){
 				if(preIndex < curIndex){
 					for(var i = preIndex; i < curIndex; i++) {
 						that.scrollUp();
@@ -139,7 +132,7 @@ FScroll.prototype.pc = function (options) {
 		var e = e || window.event;
 		e.preventDefault();
 		var deltaY = e.deltaY ? e.deltaY : e.detail;
-		if(options.scrollY && !options.scrollX) {
+		if(options.mode == 'scrollY') {
 			if(deltaY > 0) {
 				FScroll.scrollUp();
 			} 
@@ -192,13 +185,13 @@ FScroll.prototype.mobile = function (options) {
    		X = moveEndX - startX;
    		Y = moveEndY - startY;
 		// //判断touch方向
-		if(options.scrollY && !options.scrollX) {
+		if(options.mode == 'scrollY') {
 			if(Y < 0 && Math.abs(Y) > Math.abs(X)){
 				FScroll.scrollUp();
 			} else if(Y > 0 && Math.abs(Y) > Math.abs(X)){
 				FScroll.scrollDown();
 			}
-		} else if (options.scrollX && !options.scrollY) {
+		} else if (options.mode == 'scrollX') {
 			if(X < 0 && Math.abs(X) > Math.abs(Y)){
 				FScroll.scrollLeft();
 			} else if(X > 0 && Math.abs(X) > Math.abs(Y)){
@@ -290,9 +283,7 @@ FScroll.prototype._mergeOptions = function(options) {
 	if(options == null){
 		warn('Missing options');
 	}
-	for(var item in options) {
-		this.defaultOptions[item] = options[item];
-	}
+	this.defaultOptions = Object.assign({},options)
 }
 function getExploreName(){
 	var userAgent = navigator.userAgent;

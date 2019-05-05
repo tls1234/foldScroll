@@ -73,8 +73,7 @@
 	<script>
 		var scroll = new FScroll(
 		{
-			scrollY: true,
-			scrollX: false,
+			mode: 'scrollY',
 			transition: '.7s ease',
 			els: {
 				dom: [
@@ -96,9 +95,6 @@
 				],
 				navColor: '',
 				selectNavColor: '#e6e6e6'
-			},
-			countBtn: {
-				dom: ['.less-btn', '.add-btn']
 			}
 		}
 		)
